@@ -7,7 +7,7 @@ class SearchParser
         fuel['fuel_type_code'] == "LPG"
     end
     fuels.map do |fuel|
-      Station.create(name: fuel['station_name'], access: fuel['access_days_times'],
+      Station.find_or_create_by(name: fuel['station_name'], access: fuel['access_day_times'],
                  distance: fuel['distance'], fuel_type: fuel['fuel_type_code'])
     end
   end

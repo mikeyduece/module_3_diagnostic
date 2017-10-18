@@ -1,5 +1,6 @@
 <ul>
   <% @stations.each do |station| %>
+    <% require 'pry'; binding.pry %>
     <li><%= station.name %></li>
     <ul>
       <li><%= station.address %></li>
