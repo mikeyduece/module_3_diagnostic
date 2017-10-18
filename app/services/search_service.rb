@@ -1,19 +1,18 @@
 class SearchService
 
-  def initialize(zip)
-    @zip = zip
-  end
-
-
-  def self.find_alt
-    @conn = Faraday.get("https://api.data.gov/nrel/alt-fuel-stations/v1/nearest") do |faraday|
+  def find_alt
+    @conn = Faraday.get("https://api.data.gov/nrel/alt-fuel-stations/v1/nearest.json") do |faraday|
       faraday.params['api_key'] = ENV['nrel_api']
       faraday.params['location'] = '80203'
     end
-
-require 'pry'; binding.pry
+    response = @conn.body
+    JSON.parse(response)
   end
 
-  private
-    attr_reader :zip
+  def self.elec_lp
+    require 'pry'; binding.pry
+    find_alt
+  end
+
+
 end
