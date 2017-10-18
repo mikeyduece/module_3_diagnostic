@@ -1,6 +1,6 @@
 class SearchService
 
-  def find_alt
+  def self.find_alt
     @conn = Faraday.get("https://api.data.gov/nrel/alt-fuel-stations/v1/nearest.json") do |faraday|
       faraday.params['api_key'] = ENV['nrel_api']
       faraday.params['location'] = '80203'
@@ -8,11 +8,5 @@ class SearchService
     response = @conn.body
     JSON.parse(response)
   end
-
-  def self.elec_lp
-    require 'pry'; binding.pry
-    find_alt
-  end
-
 
 end

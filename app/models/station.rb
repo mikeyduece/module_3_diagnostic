@@ -1,6 +1,6 @@
 class Station < ActiveRecord::Base
 
   def self.alt_fuel
-    SearchService.elec_lp
+    SearchParser.find_alt
   end
 end
