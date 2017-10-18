@@ -12,7 +12,7 @@ feature 'User' do
   context 'search for stations' do
     scenario 'see list of 10 closest stations' do
       VCR.use_cassette('fuel') do
-        stations = create_list(:station, 6)
+        stations = Station.all
         visit '/'
         fill_in('q', with: '80203')
         click_on('Locate')
