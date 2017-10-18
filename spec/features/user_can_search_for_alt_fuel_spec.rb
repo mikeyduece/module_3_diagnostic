@@ -11,18 +11,20 @@ require 'rails_helper'
 feature 'User' do
   context 'search for stations' do
     scenario 'see list of 10 closest stations' do
-      stations = create_list(:station, 6)
-      visit '/'
-      fill_in('q', with: '80203')
-      click_on('Locate')
+      VCR.use_cassette('fuel') do
+        stations = create_list(:station, 6)
+        visit '/'
+        fill_in('q', with: '80203')
+        click_on('Locate')
 
-      expect(current_path).to eq('/search')
-      expect(page).to have_content(stations[0].name)
-      expect(page).to have_content(stations[0].address)
-      expect(page).to have_content(stations[0].fuel_type)
-      expect(page).to have_content(stations[0].distance)
-      expect(page).to have_content(stations[0].access)
+        expect(current_path).to eq('/search')
+        expect(page).to have_content(stations[0].name)
+        expect(page).to have_content(stations[0].address)
+        expect(page).to have_content(stations[0].fuel_type)
+        expect(page).to have_content(stations[0].distance)
+        expect(page).to have_content(stations[0].access)
 
+      end
     end
   end
 end
